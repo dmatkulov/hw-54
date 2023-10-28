@@ -13,7 +13,7 @@ const Cell: React.FC<Props> = ({hasItem, clicked, onCellClick}) => {
     cellStyle.push('clicked');
   }
 
-  const ring = (clicked && hasItem) ? 'O' : '';
+  const ring = (clicked && hasItem) ? '💍' : '';
 
   return (
     <div
