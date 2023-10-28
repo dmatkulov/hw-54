@@ -15,7 +15,7 @@ const GameBoard: React.FC<Props> = ({ items, onCellClick }) => {
           key={index}
           hasItem={item.hasItem}
           clicked={item.clicked}
-          onClick={() => onCellClick}
+          onCellClick={() => onCellClick}
         />
       ))}
     </div>

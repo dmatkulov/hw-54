@@ -3,9 +3,9 @@ import React from 'react';
 interface Props {
   hasItem: boolean;
   clicked: boolean;
-  onClick: React.MouseEventHandler;
+  onCellClick: React.MouseEventHandler;
 }
-const Cell: React.FC<Props> = ({hasItem, clicked, onClick}) => {
+const Cell: React.FC<Props> = ({hasItem, clicked, onCellClick}) => {
   const cellStyle = ['cell'];
 
   if (clicked) {
@@ -17,7 +17,7 @@ const Cell: React.FC<Props> = ({hasItem, clicked, onClick}) => {
   return (
     <div
       className={cellStyle.join(' ')}
-      onClick={onClick}
+      onClick={onCellClick}
     >
       {ring}
     </div>
