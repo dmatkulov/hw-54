@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import GameBoard from '../components/GameBoard/GameBoard.tsx';
 import ResetBtn from '../components/ResetBtn/ResetBtn.tsx';
 import Counter from '../components/Counter/Counter.tsx';
@@ -18,6 +18,7 @@ const createItems = () => {
 const App = () => {
   const [items, setItems] = useState<CellData[]>(createItems());
   const [attempt, setAttempt] = useState<number>(0);
+  const [found, setFound] = useState<boolean>(false);
 
   const handleCellClick = (index: number) => {
     const openCells: CellData[] = [...items];
@@ -25,21 +26,37 @@ const App = () => {
     if (openCells[index].clicked) {
       return;
     }
+    openCells[index].hasItem ? setFound(true) : false;
 
     openCells[index].clicked = true;
     setItems(openCells);
 
-    setAttempt(prevState => prevState + 1);
+    setAttempt((prevState) => {
+      if (found) {
+        openCells[index].clicked = false;
+        return prevState;
+      }
+        return prevState + 1;
+    });
   };
 
   const handleResetClick = () => {
     setItems(createItems);
     setAttempt(0);
+    setFound(false);
   };
 
+  let message: React.ReactNode = null;
+
+  if (found) {
+    message = (
+      <div>Ring found!</div>
+    );
+  }
   return (
     <div>
       <Counter attempts={attempt}/>
+      {message}
       <GameBoard items={items} handleClick={(index) => handleCellClick(index)}></GameBoard>
       <ResetBtn onClick={handleResetClick}>Reset Game</ResetBtn>
     </div>
