@@ -2,14 +2,10 @@ import React from 'react';
 
 interface Props extends React.PropsWithChildren{
   onClick: React.MouseEventHandler;
-  isActive: boolean;
 }
-const ResetBtn: React.FC<Props> = ({onClick, isActive, children}) => {
+const ResetBtn: React.FC<Props> = ({onClick, children}) => {
   const buttonClasses = ['ToggleButton'];
 
-  if (isActive) {
-    buttonClasses.push('Red');
-  }
 
   return (
     <div>

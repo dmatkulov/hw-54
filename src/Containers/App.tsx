@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import GameBoard from '../components/GameBoard/GameBoard.tsx';
+import ResetBtn from '../components/ResetBtn/ResetBtn.tsx';
 import {CellData} from '../types';
 import './App.css';
 
@@ -22,10 +23,14 @@ const App = () => {
     setItems(updatedItems);
   };
 
+  const handleResetClick = () => {
+    setItems(createItems);
+  };
 
   return (
     <div>
       <GameBoard items={items} handleClick={(index) => handleCellClick(index)}></GameBoard>
+      <ResetBtn onClick={handleResetClick}>Reset Game</ResetBtn>
     </div>
   );
 };
