@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import GameBoard from '../components/GameBoard/GameBoard.tsx';
 import ResetBtn from '../components/ResetBtn/ResetBtn.tsx';
+import Counter from '../components/Counter/Counter.tsx';
 import {CellData} from '../types';
 import './App.css';
 
@@ -16,19 +17,29 @@ const createItems = () => {
 
 const App = () => {
   const [items, setItems] = useState<CellData[]>(createItems());
+  const [attempt, setAttempt] = useState<number>(0);
 
   const handleCellClick = (index: number) => {
-    const updatedItems: CellData[] = [...items];
-    updatedItems[index].clicked = true;
-    setItems(updatedItems);
+    const openCells: CellData[] = [...items];
+
+    if (openCells[index].clicked) {
+      return;
+    }
+
+    openCells[index].clicked = true;
+    setItems(openCells);
+
+    setAttempt(prevState => prevState + 1);
   };
 
   const handleResetClick = () => {
     setItems(createItems);
+    setAttempt(0);
   };
 
   return (
     <div>
+      <Counter attempts={attempt}/>
       <GameBoard items={items} handleClick={(index) => handleCellClick(index)}></GameBoard>
       <ResetBtn onClick={handleResetClick}>Reset Game</ResetBtn>
     </div>
