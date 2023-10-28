@@ -1,4 +1,5 @@
 import React from 'react';
+import './Cell.css';
 
 interface Props {
   hasItem: boolean;
@@ -12,7 +13,7 @@ const Cell: React.FC<Props> = ({hasItem, clicked, onCellClick}) => {
     cellStyle.push('clicked');
   }
 
-  const ring = hasItem ? 'O' : '';
+  const ring = (clicked && hasItem) ? 'O' : '';
 
   return (
     <div

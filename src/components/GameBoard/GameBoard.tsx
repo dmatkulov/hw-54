@@ -1,21 +1,22 @@
 import React from 'react';
 import Cell from '../Cell/Cell.tsx';
 import {CellData} from '../../types';
+import './GameBoard.css';
 
 interface Props {
-  onCellClick: React.MouseEventHandler;
+  handleClick: (index: number) => void;
   items: CellData[];
 }
 
-const GameBoard: React.FC<Props> = ({ items, onCellClick }) => {
+const GameBoard: React.FC<Props> = ({ items, handleClick }) => {
   return (
     <div className="board">
-      {items.map((item, index) => (
+      {items.map((item, index: number) => (
         <Cell
           key={index}
           hasItem={item.hasItem}
           clicked={item.clicked}
-          onCellClick={() => onCellClick}
+          onCellClick={() => handleClick(index)}
         />
       ))}
     </div>
