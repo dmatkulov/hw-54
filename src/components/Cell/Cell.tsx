@@ -6,6 +6,7 @@ interface Props {
   clicked: boolean;
   onCellClick: React.MouseEventHandler;
 }
+
 const Cell: React.FC<Props> = ({hasItem, clicked, onCellClick}) => {
   const cellStyle = ['cell'];
 
