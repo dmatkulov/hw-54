@@ -1,7 +1,6 @@
 import React from 'react';
 import Cell from '../Cell/Cell.tsx';
 import {CellData} from '../../types';
-import './GameBoard.css';
 
 interface Props {
   handleClick: (index: number) => void;
@@ -9,8 +8,17 @@ interface Props {
 }
 
 const GameBoard: React.FC<Props> = ({ items, handleClick }) => {
+  const boardStyle: React.CSSProperties = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(6, 50px)',
+    gridTemplateRows: 'repeat(6, 50px)',
+    gap: '2px',
+    padding: '15px',
+    border: '1px solid #242424',
+  };
+
   return (
-    <div className="board">
+    <div style={boardStyle}>
       {items.map((item, index: number) => (
         <Cell
           key={index}
