@@ -23,20 +23,21 @@ const App = () => {
   const handleCellClick = (index: number) => {
     const openCells: CellData[] = [...items];
 
-    if (openCells[index].clicked) {
-      return;
-    }
     openCells[index].hasItem ? setFound(true) : false;
 
-    openCells[index].clicked = true;
-    setItems(openCells);
+    if (openCells[index].clicked) {
+      return;
+    } else {
+      openCells[index].clicked = true;
+    }
 
+    setItems(openCells);
     setAttempt((prevState) => {
       if (found) {
         openCells[index].clicked = false;
         return prevState;
       }
-      return prevState + 1;
+        return prevState + 1;
     });
   };
 
@@ -62,10 +63,10 @@ const App = () => {
   }
   return (
     <div>
-        <Counter attempts={attempt}/>
-        {message}
-        <GameBoard items={items} handleClick={(index) => handleCellClick(index)}></GameBoard>
-        <ResetBtn onClick={handleResetClick} attempts={attempt}>Reset Game</ResetBtn>
+      <Counter attempts={attempt}/>
+      {message}
+      <GameBoard items={items} handleClick={(index) => handleCellClick(index)}></GameBoard>
+      <ResetBtn onClick={handleResetClick} attempts={attempt}>Reset Game</ResetBtn>
     </div>
   );
 };
