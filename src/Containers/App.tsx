@@ -1,14 +1,15 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import GameBoard from '../components/GameBoard/GameBoard.tsx';
 import ResetBtn from '../components/ResetBtn/ResetBtn.tsx';
 import Counter from '../components/Counter/Counter.tsx';
+import Message from '../components/Message/Message.tsx';
 import {CellData} from '../types';
 import './App.css';
 
 const createItems = () => {
   const items: CellData[] = [];
   for (let i = 0; i < 36; i++) {
-      items.push({hasItem: false, clicked: false});
+    items.push({hasItem: false, clicked: false});
   }
   const randomIndex = Math.floor(Math.random() * items.length);
   items[randomIndex].hasItem = true;
@@ -37,7 +38,7 @@ const App = () => {
         openCells[index].clicked = false;
         return prevState;
       }
-        return prevState + 1;
+      return prevState + 1;
     });
   };
 
@@ -47,24 +48,10 @@ const App = () => {
     setFound(false);
   };
 
-  let message: React.ReactNode = null;
-
-  const messageStyle: React.CSSProperties = {
-    color: 'sienna',
-    fontSize: '24px',
-    fontWeight: 'bold',
-    marginBottom: '20px'
-  };
-
-  if (found) {
-    message = (
-        <div style={messageStyle}>Ring found!</div>
-    );
-  }
   return (
     <div>
       <Counter attempts={attempt}/>
-      {message}
+      {found ? (<Message text="Ring found!"/>) : null}
       <GameBoard items={items} handleClick={(index) => handleCellClick(index)}></GameBoard>
       <ResetBtn onClick={handleResetClick} attempts={attempt}>Reset Game</ResetBtn>
     </div>
